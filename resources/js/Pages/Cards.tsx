@@ -11,27 +11,17 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
   }
 
   if (!cards) {
-    return (
-      <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-        No cards
-      </h2>
-    );
+    return <h2 className="">No cards</h2>;
   }
 
   return (
-    <AuthenticatedLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-          {cards[0].set.name}
-        </h2>
-      }
-    >
-      <Head title="Sets" />
+    <AuthenticatedLayout header={<h2 className="">{cards[0].set.name}</h2>}>
+      <Head title="" />
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-            <div className="p-6 text-gray-900 dark:text-gray-100">Sets</div>
+      <div className="">
+        <div className="">
+          <div className="">
+            <div className="">Sets</div>
             <div className="flex flex-wrap gap-4">
               {cards.map((c) => {
                 return (
