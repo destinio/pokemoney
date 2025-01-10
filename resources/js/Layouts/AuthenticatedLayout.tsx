@@ -5,13 +5,12 @@ import { usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode } from 'react';
 
 export default function Authenticated({
-  header,
   children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
   const user = usePage().props.auth.user;
 
   return (
-    <div className="m-auto max-w-screen-md">
+    <div className="m-auto flex max-w-screen-md flex-col px-4">
       <div className="flex justify-between py-8">
         <h1>Poke Money</h1>
         <nav className="flex gap-2">
@@ -32,13 +31,7 @@ export default function Authenticated({
         </nav>
       </div>
 
-      {header && (
-        <header className="">
-          <div className="">{header}</div>
-        </header>
-      )}
-
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
     </div>
   );
 }
