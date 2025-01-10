@@ -1,3 +1,4 @@
+import { Loading } from '@/Components/Loading';
 import {
   Accordion,
   AccordionContent,
@@ -13,7 +14,11 @@ export default function Sets() {
   const { data: series, isLoading, isFetching } = useSets();
 
   if (isLoading || isFetching) {
-    return <h2>Loading...</h2>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   if (!series) {
@@ -34,7 +39,7 @@ export default function Sets() {
                   <div className="flex flex-wrap gap-4">
                     {s.sets.map((set) => {
                       return (
-                        <Link href={`/set/${set.id}`}>
+                        <Link key={set.id} href={`/set/${set.id}`}>
                           <img
                             key={set.id}
                             src={set.images.logo}

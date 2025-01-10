@@ -24,6 +24,11 @@ export default function Authenticated({
           <NavLink href={route('sets')} active={route().current('sets')}>
             Sets
           </NavLink>
+          <p>-</p>
+          <h2>{user.name}</h2>
+          <NavLink method="post" active={false} href={route('logout')}>
+            logout
+          </NavLink>
         </nav>
       </div>
 

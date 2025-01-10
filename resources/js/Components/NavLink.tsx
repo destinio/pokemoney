@@ -1,4 +1,5 @@
 import { InertiaLinkProps, Link } from '@inertiajs/react';
+import classnames from 'classnames';
 
 export default function NavLink({
   active = false,
@@ -7,7 +8,13 @@ export default function NavLink({
   ...props
 }: InertiaLinkProps & { active: boolean }) {
   return (
-    <Link className="hover:text-sky-400" {...props}>
+    <Link
+      className={classnames(`hover:text-sky-400`, {
+        'text-sky-400': active,
+        className: !!className,
+      })}
+      {...props}
+    >
       {children}
     </Link>
   );

@@ -33,7 +33,6 @@ export interface ICard {
   regulationMark: string;
   images: Images2;
   tcgplayer: Tcgplayer;
-  cardmarket: Cardmarket;
   evolvesFrom?: string;
 }
 
@@ -89,60 +88,18 @@ interface Tcgplayer {
   url: string;
   updatedAt: string;
   prices: {
-    [key: string]: Prices;
+    normal?: Prices;
+    holofoil?: Prices;
+    reverseHolofoil?: Prices;
+    '1stEditionHolofoil'?: Prices;
+    '1stEditionNormal'?: Prices;
   };
 }
 
 interface Prices {
-  reverseHolofoil?: ReverseHolofoil;
-  normal?: Normal;
-  holofoil?: Holofoil;
-}
-
-interface ReverseHolofoil {
-  low: number;
-  mid: number;
-  high: number;
-  market: number;
-  directLow?: number;
-}
-
-interface Normal {
-  low: number;
-  mid: number;
-  high: number;
-  market: number;
-  directLow?: number;
-}
-
-interface Holofoil {
   low: number;
   mid: number;
   high: number;
   market: number;
   directLow: number;
-}
-
-interface Cardmarket {
-  url: string;
-  updatedAt: string;
-  prices: Prices2;
-}
-
-interface Prices2 {
-  averageSellPrice: number;
-  lowPrice: number;
-  trendPrice: number;
-  germanProLow: number;
-  suggestedPrice: number;
-  reverseHoloSell: number;
-  reverseHoloLow: number;
-  reverseHoloTrend: number;
-  lowPriceExPlus: number;
-  avg1: number;
-  avg7: number;
-  avg30: number;
-  reverseHoloAvg1: number;
-  reverseHoloAvg7: number;
-  reverseHoloAvg30: number;
 }
