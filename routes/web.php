@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OwnedController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,14 @@ Route::get('/sets', function () {
 Route::get('/set/{id}', function ($id) {
   return Inertia::render('Cards', ['id' => $id]);
 })->middleware(['auth', 'verified'])->name('cards');
+
+Route::resource('owned', OwnedController::class)
+  ->only(['index', 'store'])
+  ->middleware(['auth', 'verified'])
+  ->names([
+    'index' => 'owned.index',
+    'store' => 'owned.store'
+  ]);
 
 
 Route::middleware('auth')->group(function () {

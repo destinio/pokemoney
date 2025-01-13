@@ -1,4 +1,4 @@
-import { ICard, ISet } from './types';
+import { ICard, ISet } from './all-types';
 
 interface ISetsReturn {
   name: string;

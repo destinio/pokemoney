@@ -1,46 +1,59 @@
+import { Loading } from '@/Components/Loading';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/Components/ui/accordion';
+
 import { useSets } from '@/hooks/useSets';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Sets() {
   const { data: series, isLoading, isFetching } = useSets();
 
   if (isLoading || isFetching) {
-    return <h2>Loading...</h2>;
-  }
-
-  if (!series) {
     return (
-      <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-        No Sets
-      </h2>
+      <div>
+        <Loading />
+      </div>
     );
   }
 
+  if (!series) {
+    return <h2 className="">No Sets</h2>;
+  }
+
   return (
-    <AuthenticatedLayout
-      header={
-        <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-          Series/Sets
-        </h2>
-      }
-    >
+    <AuthenticatedLayout header={<h2 className="">Series/Sets</h2>}>
       <Head title="Sets" />
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-            <div className="flex flex-col gap-4 text-xl text-sky-200">
-              {series.map((set) => {
-                return (
-                  <div>
-                    <h2>{set.name}</h2>
+      <div className="">
+        <Accordion type="single" collapsible>
+          {series.map((s, i) => {
+            return (
+              <AccordionItem key={s.name} value={`item-${i + 1}`}>
+                <AccordionTrigger>{s.name}</AccordionTrigger>
+                <AccordionContent>
+                  <div className="flex flex-wrap gap-4">
+                    {s.sets.map((set) => {
+                      return (
+                        <Link key={set.id} href={`/set/${set.id}`}>
+                          <img
+                            key={set.id}
+                            src={set.images.logo}
+                            className="h-16"
+                          />
+                        </Link>
+                      );
+                    })}
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+                </AccordionContent>
+              </AccordionItem>
+            );
+          })}
+        </Accordion>
       </div>
     </AuthenticatedLayout>
   );

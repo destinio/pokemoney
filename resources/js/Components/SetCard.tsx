@@ -1,4 +1,4 @@
-import { ISet } from '@/types';
+import { ISet } from '@/all-types';
 import { Link } from '@inertiajs/react';
 
 export function SetCard({ set }: { set: ISet }) {
