@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Owned;
+use App\Models\Seen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -14,12 +15,22 @@ class OwnedController extends Controller
    * Display a listing of the resource.
    */
   public function index(): Response
-
   {
-    $ownedAll = Owned::all();
+    $owned_info = Owned::with('seen')
+      ->where('user_id', Auth::id())
+      ->get();
+
+    $converted = $owned_info->map(function ($owned) {
+      $ownedData = $owned->toArray();
+      $seenData = $owned->seen ? $owned->seen->toArray() : [];
+      unset($seenData['id']);
+      unset($ownedData['seen']);
+
+      return array_merge($ownedData, $seenData);
+    });
 
     return Inertia::render('Owned/Index', [
-      'ownedCards' => $ownedAll,
+      'ownedCards' => $converted
     ]);
   }
 
@@ -36,32 +47,34 @@ class OwnedController extends Controller
    */
   public function store(Request $request)
   {
-    /* $request->validate([ */
-    /*   'name' => 'required|string|max:255', */
-    /*   'number' => 'required|string|max:255', */
-    /*   'cardId' => 'required|string|max:255', */
-    /*   'image' => 'required|string|max:255', */
-    /*   'setId' => 'required|string|max:255', */
-    /*   'setName' => 'required|string|max:255', */
-    /*   'setSeries' => 'required|string|max:255', */
-    /*   'rarity' => 'required|string|max:255', */
-    /*   'rawJson' => 'required|json', */
-    /* ]); */
+    /* dd($request); */
+    $rawId = $request->cardId . ':' . $request->type;
 
-    // Create the Owned record and associate with the authenticated user
-    Owned::create([
-      'name' => $request->name,
-      'number' => $request->number,
-      'cardId' => $request->cardId,
-      'image' => $request->image,
-      'setId' => $request->setId,
-      'setName' => $request->setName,
-      'setImage' => $request->setImage,
-      'setSeries' => $request->setSeries,
-      'rarity' => $request->rarity,
-      'rawJson' => $request->rawJson,
+    $seen = Seen::firstOrCreate(
+      ['id' => $rawId], // Find by this unique identifier
+      [                 // Create with these values if not found
+        'name' => $request->name,
+        'number' => $request->number,
+        'cardId' => $request->cardId,
+        'image' => $request->image,
+        'type' => $request->type,
+        'setId' => $request->setId,
+        'setName' => $request->setName,
+        'setImage' => $request->setImage,
+        'setSeries' => $request->setSeries,
+        'rarity' => $request->rarity,
+        'rawJson' => $request->rawJson,
+      ]
+    );
+
+    $owned = [
+      'pricePaid' => 5,  // Allow mass-assignment for pricePaid
+      'seen_id' => $seen->id,    // Allow mass-assignment for seen_id
       'user_id' => Auth::id(),
-    ]);
+    ];
+
+
+    Owned::create($owned);
 
     return redirect()->route('owned.index');
   }

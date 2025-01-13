@@ -10,24 +10,23 @@ class Owned extends Model
   /** @use HasFactory<\Database\Factories\OwnedFactory> */
   use HasFactory;
 
-  protected $table = 'owned';
+  protected $table = "owned";
 
+  // Specify the columns that can be mass-assigned
   protected $fillable = [
-    'name',
-    'number',
-    'cardId',
-    'image',
-    'setId',
-    'setName',
-    'setImage',
-    'setSeries',
-    'rarity',
-    'rawJson',
-    'user_id',
+    'pricePaid',  // Allow mass-assignment for pricePaid
+    'seen_id',    // Allow mass-assignment for seen_id
+    'user_id',    // Allow mass-assignment for user_id
   ];
 
+  // Define the relationship to the User model
   public function user()
   {
-    return $this->belongsTo(User::class);
+    return $this->belongsTo(User::class); // Each Owned entry belongs to a User
+  }
+
+  public function seen()
+  {
+    return $this->belongsTo(Seen::class); // Each Owned entry belongs to a Seen
   }
 }

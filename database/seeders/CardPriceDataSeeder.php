@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class OwnedSeeder extends Seeder
+class CardPriceDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
