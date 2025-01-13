@@ -14,6 +14,7 @@ class Owned extends Model
 
   // Specify the columns that can be mass-assigned
   protected $fillable = [
+    'name',
     'pricePaid',  // Allow mass-assignment for pricePaid
     'seen_id',    // Allow mass-assignment for seen_id
     'user_id',    // Allow mass-assignment for user_id

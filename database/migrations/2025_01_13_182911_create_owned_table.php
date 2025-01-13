@@ -13,6 +13,7 @@ return new class extends Migration
   {
     Schema::create('owned', function (Blueprint $table) {
       $table->id();
+      $table->string('name');
       $table->timestamps();
       $table->decimal('pricePaid', 8, 2); // Changed from 'number' to 'decimal' for price
       $table->foreignId('seen_id')->constrained('seen'); // No cascade on delete for 'seens'
