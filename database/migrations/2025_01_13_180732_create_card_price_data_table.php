@@ -13,7 +13,6 @@ return new class extends Migration
   {
     Schema::create('card_price_data', function (Blueprint $table) {
       $table->id();
-      $table->string('apiCardId');
       $table->decimal('low', 8, 2)->nullable();
       $table->decimal('mid', 8, 2)->nullable();
       $table->decimal('high', 8, 2)->nullable();
