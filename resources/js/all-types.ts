@@ -103,3 +103,20 @@ interface Prices {
   market: number;
   directLow: number;
 }
+
+export interface IOwned {
+  id: number; // auto-incrementing primary key
+  created_at: string; // ISO 8601 string format for timestamps
+  updated_at: string; // ISO 8601 string format for timestamps
+  name: string;
+  number: string;
+  cardId: string;
+  image: string;
+  setId: string;
+  setName: string;
+  setImage: string; // added based on your migration
+  setSeries: string;
+  rarity: string;
+  rawJson: object; // JSON object, could be any complex structure
+  user_id: number; // foreign key to the users table
+}

@@ -11,7 +11,7 @@ import { Input } from '@/Components/ui/input';
 import { useSet } from '@/hooks/useSets';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 
 function NA() {
@@ -28,7 +28,7 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
 
   useEffect(() => {
     if (data) {
-      setCards(data);
+      setCards(data.sort((a, b) => Number(a.number) - Number(b.number)));
     }
   }, [data]);
 
@@ -55,11 +55,6 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
         );
       }
     }
-  }
-
-  function handleSelect(c: ICard) {
-    setCurrentCard(c);
-    setCardOpen(true);
   }
 
   return (
@@ -112,6 +107,24 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
                     <AccordionContent>
                       <div className="flex w-full justify-between">
                         <div>
+                          <Link
+                            href={route('owned.store')}
+                            method="post"
+                            data={{
+                              name: c.name,
+                              number: c.number,
+                              cardId: c.id,
+                              setId: c.set.id,
+                              setName: c.set.name,
+                              setImage: c.set.images.logo,
+                              setSeries: c.set.series,
+                              rarity: c.rarity,
+                              image: c.images.small,
+                              rawJson: JSON.stringify(c),
+                            }}
+                          >
+                            SAVE
+                          </Link>
                           <div>{c.rarity}</div>
                           <div>
                             {c.tcgplayer?.prices &&
