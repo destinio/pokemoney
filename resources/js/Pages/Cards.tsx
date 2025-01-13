@@ -12,10 +12,56 @@ import { useSet } from '@/hooks/useSets';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { useEffect, useRef, useState } from 'react';
+import { BaseSyntheticEvent, useEffect, useRef, useState } from 'react';
 
 function NA() {
   return <span className="text-slate-700">N\A</span>;
+}
+
+function SaveCardForm({ card }: { card: ICard }) {
+  const [type, setType] = useState(
+    () => Object.entries(card.tcgplayer.prices)[0][0],
+  );
+
+  function handleTypeChange(e: BaseSyntheticEvent) {
+    console.log(e.target.value);
+    setType(e.target.value);
+  }
+
+  return (
+    <>
+      <select onChange={handleTypeChange} className="text-slate-950">
+        {Object.keys(card.tcgplayer.prices).map((k, i) => (
+          <option
+            className="text-slate-950"
+            value={k}
+            key={`${k}-${card.id}-${i}`}
+          >
+            {k}
+          </option>
+        ))}
+      </select>
+      <Link
+        href={route('owned.store')}
+        method="post"
+        data={{
+          name: card.name,
+          number: card.number,
+          type: type,
+          cardId: card.id,
+          setId: card.set.id,
+          setName: card.set.name,
+          setImage: card.set.images.logo,
+          setSeries: card.set.series,
+          rarity: card.rarity,
+          image: card.images.small,
+          rawJson: JSON.stringify(card),
+        }}
+      >
+        SAVE
+      </Link>
+    </>
+  );
 }
 
 export default function Cards({ id }: PageProps<{ id: string }>) {
@@ -107,24 +153,7 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
                     <AccordionContent>
                       <div className="flex w-full justify-between">
                         <div>
-                          <Link
-                            href={route('owned.store')}
-                            method="post"
-                            data={{
-                              name: c.name,
-                              number: c.number,
-                              cardId: c.id,
-                              setId: c.set.id,
-                              setName: c.set.name,
-                              setImage: c.set.images.logo,
-                              setSeries: c.set.series,
-                              rarity: c.rarity,
-                              image: c.images.small,
-                              rawJson: JSON.stringify(c),
-                            }}
-                          >
-                            SAVE
-                          </Link>
+                          <SaveCardForm card={c} />
                           <div>{c.rarity}</div>
                           <div>
                             {c.tcgplayer?.prices &&

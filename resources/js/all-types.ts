@@ -84,19 +84,13 @@ interface Images2 {
   large: string;
 }
 
-interface Tcgplayer {
+export interface Tcgplayer {
   url: string;
   updatedAt: string;
-  prices: {
-    normal?: Prices;
-    holofoil?: Prices;
-    reverseHolofoil?: Prices;
-    '1stEditionHolofoil'?: Prices;
-    '1stEditionNormal'?: Prices;
-  };
+  prices: Record<CardPriceType, Prices>;
 }
 
-interface Prices {
+export interface Prices {
   low: number;
   mid: number;
   high: number;
@@ -120,3 +114,10 @@ export interface IOwned {
   rawJson: object; // JSON object, could be any complex structure
   user_id: number; // foreign key to the users table
 }
+
+export type CardPriceType =
+  | 'normal'
+  | 'holofoil'
+  | 'reverseHolofoil'
+  | '1stEditionHolofoil'
+  | '1stEditionNormal';

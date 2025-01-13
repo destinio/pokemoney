@@ -11,11 +11,12 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('owned', function (Blueprint $table) {
-      $table->id();
-      $table->timestamps();
+    Schema::create('seen', function (Blueprint $table) {
+      $table->string('id')->primary();
+
       $table->string('name');
       $table->string('number');
+      $table->string('type');
       $table->string('cardId');
       $table->string('image');
       $table->string('setId');
@@ -24,7 +25,8 @@ return new class extends Migration
       $table->string('setSeries');
       $table->string('rarity');
       $table->json('rawJson');
-      $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+      $table->timestamps();
     });
   }
 
@@ -33,6 +35,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('owned');
+    Schema::dropIfExists('seen');
   }
 };
