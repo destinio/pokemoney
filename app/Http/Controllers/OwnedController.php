@@ -11,9 +11,6 @@ use Inertia\Response;
 
 class OwnedController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
   public function index(): Response
   {
     $owned_info = Owned::with('seen')
@@ -23,6 +20,9 @@ class OwnedController extends Controller
     $converted = $owned_info->map(function ($owned) {
       $ownedData = $owned->toArray();
       $seenData = $owned->seen ? $owned->seen->toArray() : [];
+      $seenData['seenName'] = $owned->seen->name;
+
+      unset($seenData['name']);
       unset($seenData['id']);
       unset($ownedData['seen']);
 

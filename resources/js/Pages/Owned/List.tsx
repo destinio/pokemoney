@@ -82,6 +82,7 @@ export default function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
                     </AccordionTrigger>
                     <AccordionContent>
                       <div className="flex w-full justify-between">
+                        <div>{c.seenName}</div>
                         <div>
                           <div>{c.rarity}</div>
                         </div>
