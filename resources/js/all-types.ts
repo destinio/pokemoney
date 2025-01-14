@@ -111,6 +111,7 @@ export interface IOwned {
   setImage: string; // added based on your migration
   setSeries: string;
   rarity: string;
+  seenName: string;
   rawJson: object; // JSON object, could be any complex structure
   user_id: number; // foreign key to the users table
 }
