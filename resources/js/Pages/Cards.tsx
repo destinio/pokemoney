@@ -22,9 +22,14 @@ function SaveCardForm({ card }: { card: ICard }) {
     () => Object.entries(card.tcgplayer.prices)[0][0] as CardPriceType,
   );
 
+  const [pricePaid, setPricePaid] = useState(0);
+
   function handleTypeChange(e: BaseSyntheticEvent) {
-    console.log(e.target.value);
     setType(e.target.value);
+  }
+
+  function handlePricePaidChange(e: BaseSyntheticEvent) {
+    setPricePaid(Number(e.target.value));
   }
 
   return (
@@ -40,6 +45,14 @@ function SaveCardForm({ card }: { card: ICard }) {
           </option>
         ))}
       </select>
+      <input
+        className="text-slate-950"
+        onChange={handlePricePaidChange}
+        name="pricePaid"
+        placeholder="price paid"
+        type="number"
+        defaultValue={0}
+      />
       <Link
         href={route('owned.store')}
         method="post"
@@ -56,6 +69,7 @@ function SaveCardForm({ card }: { card: ICard }) {
           image: card.images.small,
           rawJson: JSON.stringify(card),
           prices: JSON.stringify(card.tcgplayer.prices[type]),
+          pricePaid: pricePaid,
         }}
       >
         SAVE
@@ -84,12 +98,10 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
       console.log('number check', !!Number(value));
 
       if (!!Number(value)) {
-        console.log('number search', value);
         setCards(cards.filter((card) => card.number.includes(value)));
         return;
       } else {
         if (value.length <= 2) {
-          console.log('reset');
           setCards(data);
           return;
         }
