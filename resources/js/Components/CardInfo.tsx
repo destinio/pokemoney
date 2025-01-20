@@ -1,4 +1,5 @@
 import { IOwned } from '@/all-types';
+import { Link } from '@inertiajs/react';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import {
@@ -19,8 +20,10 @@ const isPositive = (value: number) => {
 interface ICardInfoProps {
   card: IOwned;
   close: () => void;
+  handleDelete: () => void;
 }
-export const CardInfo = ({ card, close }: ICardInfoProps) => {
+
+export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
   const [cardId, cardType] = card.seen_id.split(':');
   const [_seriesSet, cardNumber] = cardId.split('-');
 
@@ -39,7 +42,7 @@ export const CardInfo = ({ card, close }: ICardInfoProps) => {
 
   return (
     <div className="flex flex-col gap-4 bg-slate-900">
-      <header className="flex-0 mb-2 flex flex-col border-b-2 border-b-slate-600 pb-2">
+      <div className="flex-0 mb-2 flex flex-col border-b-2 border-b-slate-600 pb-2">
         <div className="flex w-full justify-between">
           <div className="mb-4 flex items-baseline gap-2">
             <span>{cardNumber}</span>
@@ -111,7 +114,16 @@ export const CardInfo = ({ card, close }: ICardInfoProps) => {
             <div>{card.prices[0].market}</div>
           </div>
         </div>
-      </header>
+      </div>
+      <div>
+        <Link
+          onClick={handleDelete}
+          method="delete"
+          href={route('owned.destroy', { owned: card.id })}
+        >
+          Delete
+        </Link>
+      </div>
     </div>
   );
 };
