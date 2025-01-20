@@ -91,7 +91,7 @@ class OwnedController extends Controller
 
     $owned = [
       'name' => $seen->name,
-      'pricePaid' => 5,  // Allow mass-assignment for pricePaid
+      'pricePaid' => $request->pricePaid,  // Allow mass-assignment for pricePaid
       'seen_id' => $seen->id,    // Allow mass-assignment for seen_id
       'user_id' => Auth::id(),
     ];

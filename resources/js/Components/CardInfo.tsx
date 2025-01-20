@@ -58,9 +58,10 @@ export const CardInfo = ({ card, close }: ICardInfoProps) => {
             'text-red-500': !isPositive(parseFloat(cardValue)),
           })}`}
         >
-          <span>{isPositive(parseFloat(cardValue)) ? '+' : '-'}</span>
+          <span>{isPositive(parseFloat(cardValue)) ? '+' : ''}</span>
           <span>{cardValue}</span>
         </div>
+        <div>{card.pricePaid}</div>
         <div className="grid grid-cols-3">
           <img src={card.image} alt={card.name} />
           <ResponsiveContainer className="col-span-2" width="100%" height={400}>
