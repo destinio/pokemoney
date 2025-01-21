@@ -19,6 +19,10 @@ This project utilizes the following APIs:
 ## Getting Started
 To get started with the project, clone the repository and follow the setup instructions provided in the documentation.
 
+## Pull Requests
+- All pull requests are reviewed by Github AI Reviewer.
+- https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review
+
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
