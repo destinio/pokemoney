@@ -1,5 +1,7 @@
 # PokeMoney
 
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F51269b80-8d65-458a-aa2a-99a73b92b76d&style=plastic)](https://forge.laravel.com/servers/878854/sites/2593080)
+
 PokeMoney is a project that leverages various APIs to provide detailed information and services related to Pokemon Trading Card Game (TCG). The project aims to offer a comprehensive platform for Pokemon TCG enthusiasts to access card data, market prices, and other relevant details.
 
 ## Features

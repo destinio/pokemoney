@@ -15,12 +15,13 @@ return new class extends Migration
       $table->id();
       $table->string('name');
       $table->timestamps();
-      $table->decimal('pricePaid', 8, 2); // Changed from 'number' to 'decimal' for price
-      $table->foreignId('seen_id')->constrained('seen'); // No cascade on delete for 'seens'
-      $table->foreignId('user_id')->constrained('users')->cascadeOnDelete(); // Connects to 'users' table
-
+      $table->decimal('pricePaid', 8, 2); // Decimal for price
+      $table->string('seen_id'); // Change to string to match 'seen.id'
+      $table->foreign('seen_id')->references('id')->on('seen'); // Foreign key constraint
+      $table->foreignId('user_id')->constrained('users')->cascadeOnDelete(); // Connect to 'users' table
     });
   }
+
 
   /**
    * Reverse the migrations.
