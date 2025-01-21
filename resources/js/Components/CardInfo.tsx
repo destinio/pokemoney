@@ -26,9 +26,8 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
   const [cardId, cardType] = card.seen_id.split(':');
   const [_seriesSet, cardNumber] = cardId.split('-');
 
-  const cardValue = (card.prices[0].market || 0 - card.pricePaid || 0).toFixed(
-    2,
-  );
+  const marketPrice = Number(card.prices[0].market || 0);
+  const pricePaid = Number(card.pricePaid || 0);
 
   return (
     <div className="flex flex-col gap-4 bg-slate-900">
@@ -47,12 +46,12 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
         </div>
         <div
           className={`mb-4 text-2xl font-bold ${classNames({
-            'text-green-400': isPositive(parseFloat(cardValue)),
-            'text-red-500': !isPositive(parseFloat(cardValue)),
+            'text-green-400': isPositive(marketPrice - pricePaid),
+            'text-red-500': !isPositive(marketPrice - pricePaid),
           })}`}
         >
-          <span>{isPositive(parseFloat(cardValue)) ? '+' : ''}</span>
-          <span>{cardValue}</span>
+          <span>{isPositive(marketPrice) ? '+' : ''}</span>
+          <span>{marketPrice}</span>
         </div>
         <div>{card.pricePaid}</div>
         <div className="grid grid-cols-3">
