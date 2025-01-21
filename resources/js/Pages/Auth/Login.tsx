@@ -7,6 +7,16 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
+const INIT_FORM_DATA = {
+  email: '',
+  password: '',
+  remember: false,
+} as {
+  email: string;
+  password: string;
+  remember: boolean;
+};
+
 export default function Login({
   status,
   canResetPassword,
@@ -14,11 +24,8 @@ export default function Login({
   status?: string;
   canResetPassword: boolean;
 }) {
-  const { data, setData, post, processing, errors, reset } = useForm({
-    email: '',
-    password: '',
-    remember: false,
-  });
+  const { data, setData, post, processing, errors, reset } =
+    useForm(INIT_FORM_DATA);
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault();
