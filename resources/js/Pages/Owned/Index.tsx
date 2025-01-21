@@ -5,7 +5,7 @@ import { OwnedList } from './List';
 export default function OwnedPage(props: { ownedCards: IOwned[] }) {
   const { ownedCards } = props;
 
-  console.log(props);
+  // TODO: Add toasts for success and error messages
 
   return (
     <Authenticated>

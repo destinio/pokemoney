@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
-use function PHPUnit\Framework\returnSelf;
-
 class OwnedController extends Controller
 {
   public function index(): Response
