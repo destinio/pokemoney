@@ -6,7 +6,6 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -26,9 +25,6 @@ export default function PricesChart({ priceChartData }: IPriceChartDataProps) {
         />
         <YAxis label={{ value: 'Value', angle: -90, position: 'insideLeft' }} />
         <Legend />
-        <Tooltip
-          formatter={(value: number) => `$${value ? value.toFixed(2) : 'N/A'}`}
-        />
         <Line type="monotone" dataKey="low" stroke="#8884d8" name="Low" />
         <Line type="monotone" dataKey="mid" stroke="#82ca9d" name="Mid" />
         <Line type="monotone" dataKey="high" stroke="#ffc658" name="High" />
