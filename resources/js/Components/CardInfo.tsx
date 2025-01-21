@@ -26,7 +26,9 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
   const [cardId, cardType] = card.seen_id.split(':');
   const [_seriesSet, cardNumber] = cardId.split('-');
 
-  const cardValue = (card.prices[0].market - card.pricePaid).toFixed(2);
+  const cardValue = (card.prices[0].market || 0 - card.pricePaid || 0).toFixed(
+    2,
+  );
 
   return (
     <div className="flex flex-col gap-4 bg-slate-900">
