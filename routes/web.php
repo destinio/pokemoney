@@ -33,11 +33,12 @@ Route::resource('seen', SeenController::class)
   ->middleware(['auth', 'verified']);
 
 Route::resource('owned', OwnedController::class)
-  ->only(['index', 'store'])
+  ->only(['index', 'store', 'destroy'])
   ->middleware(['auth', 'verified'])
   ->names([
     'index' => 'owned.index',
-    'store' => 'owned.store'
+    'store' => 'owned.store',
+    'destroy' => 'owned.destroy',
   ]);
 
 

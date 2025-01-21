@@ -18,7 +18,7 @@ interface IOwnedListProps {
 }
 
 export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
-  const [cards, _setCards] = useState<IOwned[]>(() => {
+  const [cards, setCards] = useState<IOwned[]>(() => {
     return cardsRaw;
   });
 
@@ -41,6 +41,13 @@ export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
     setCurrentCard(card);
   };
 
+  const handleDelete = () => {
+    setCards((prev) => {
+      return prev.filter((c) => c.id !== currentCard.id);
+    });
+    setCurrentCard(null!);
+  };
+
   return (
     <>
       <Head title="Set" />
@@ -50,7 +57,11 @@ export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
           <div>Owned Cards</div>
         </header>
         {currentCard ? (
-          <CardInfo close={() => setCurrentCard(null!)} card={currentCard} />
+          <CardInfo
+            handleDelete={handleDelete}
+            close={() => setCurrentCard(null!)}
+            card={currentCard}
+          />
         ) : null}
         {!currentCard ? (
           <div>

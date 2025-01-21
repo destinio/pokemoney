@@ -131,6 +131,12 @@ class OwnedController extends Controller
    */
   public function destroy(Owned $owned)
   {
-    //
+    if ($owned->user_id !== Auth::id()) {
+      return back()->with('error', 'You do not have permission to delete this record.');
+    }
+
+    $owned->delete();
+
+    return redirect()->route('owned.index')->with('success', 'Record deleted successfully.');
   }
 }
