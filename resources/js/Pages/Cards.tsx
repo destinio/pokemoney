@@ -1,5 +1,6 @@
-import { CardPriceType, ICard } from '@/all-types';
+import { ICard } from '@/all-types';
 import { Loading } from '@/Components/Loading';
+import SaveModal from '@/Components/SaveModal';
 import {
   Accordion,
   AccordionContent,
@@ -10,72 +11,11 @@ import { Input } from '@/Components/ui/input';
 import { useSet } from '@/hooks/useSets';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { PageProps } from '@/types';
-import { Head, Link } from '@inertiajs/react';
-import { BaseSyntheticEvent, useEffect, useRef, useState } from 'react';
+import { Head } from '@inertiajs/react';
+import { useEffect, useRef, useState } from 'react';
 
 function NA() {
   return <span className="text-slate-700">N\A</span>;
-}
-
-function SaveCardForm({ card }: { card: ICard }) {
-  const [type, setType] = useState<CardPriceType>(
-    () => Object.entries(card.tcgplayer.prices)[0][0] as CardPriceType,
-  );
-
-  const [pricePaid, setPricePaid] = useState(0);
-
-  function handleTypeChange(e: BaseSyntheticEvent) {
-    setType(e.target.value);
-  }
-
-  function handlePricePaidChange(e: BaseSyntheticEvent) {
-    setPricePaid(Number(e.target.value));
-  }
-
-  return (
-    <>
-      <select onChange={handleTypeChange} className="text-slate-950">
-        {Object.keys(card.tcgplayer.prices).map((k, i) => (
-          <option
-            className="text-slate-950"
-            value={k}
-            key={`${k}-${card.id}-${i}`}
-          >
-            {k}
-          </option>
-        ))}
-      </select>
-      <input
-        className="text-slate-950"
-        onChange={handlePricePaidChange}
-        name="pricePaid"
-        placeholder="price paid"
-        type="number"
-        defaultValue={0}
-      />
-      <Link
-        href={route('owned.store')}
-        method="post"
-        data={{
-          name: card.name,
-          number: card.number,
-          type: type,
-          cardId: card.id,
-          setId: card.set.id,
-          setName: card.set.name,
-          setImage: card.set.images.logo,
-          setSeries: card.set.series,
-          rarity: card.rarity,
-          image: card.images.small,
-          rawJson: JSON.stringify(card),
-          prices: JSON.stringify(card.tcgplayer.prices[type]),
-          pricePaid: pricePaid,
-        }}
-      >
-        SAVE
-      </Link>
-    </>
-  );
 }
 
 export default function Cards({ id }: PageProps<{ id: string }>) {
@@ -162,7 +102,7 @@ export default function Cards({ id }: PageProps<{ id: string }>) {
                     <AccordionContent>
                       <div className="flex w-full justify-between">
                         <div>
-                          <SaveCardForm card={c} />
+                          <SaveModal card={c} />
                           <div>{c.rarity}</div>
                           <div>
                             {c.tcgplayer?.prices &&
