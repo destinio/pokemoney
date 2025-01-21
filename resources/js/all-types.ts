@@ -91,12 +91,12 @@ export interface Tcgplayer {
 }
 
 export interface IPrice {
-  id: number;
-  low: number;
-  mid: number;
-  high: number;
-  market: number;
-  directLow: number;
+  id: number | string;
+  low: number | string;
+  mid: number | string;
+  high: number | string;
+  market: number | string;
+  directLow: number | string;
   seen_id: string;
   created_at: string;
   updated_at: string;
