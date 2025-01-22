@@ -79,7 +79,7 @@ export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
               </TableHeader>
               <TableBody>
                 {dataToShow.map((c) => {
-                  const { low, mid, high, market, directLow } = c.prices.sort(
+                  const { low, mid, high, market, direct_low } = c.prices.sort(
                     (a, b) =>
                       new Date(a.created_at).getTime() -
                       new Date(b.created_at).getTime(),
@@ -99,7 +99,7 @@ export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
                       <TableCell>{String(mid)}</TableCell>
                       <TableCell>{String(high)}</TableCell>
                       <TableCell>{String(market)}</TableCell>
-                      <TableCell>{String(directLow)}</TableCell>
+                      <TableCell>{String(direct_low)}</TableCell>
                       <TableCell>
                         {String(format(new Date(c.createdAt), 'MM/dd/yyyy'))}
                       </TableCell>
