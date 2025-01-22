@@ -63,15 +63,11 @@ class OwnedController extends Controller
       [                 // Create with these values if not found
         'name' => $request->name,
         'number' => $request->number,
-        'cardId' => $request->cardId,
-        'image' => $request->image,
+        'card_id' => $request->cardId,
+        'image_url' => $request->imageUrl,
         'type' => $request->type,
-        'setId' => $request->setId,
-        'setName' => $request->setName,
-        'setImage' => $request->setImage,
-        'setSeries' => $request->setSeries,
+        'set_id' => $request->setId,
         'rarity' => $request->rarity,
-        'rawJson' => $request->rawJson,
       ]
     );
 
@@ -84,14 +80,14 @@ class OwnedController extends Controller
         'mid' => $prices['mid'] ?? null,
         'high' => $prices['high'] ?? null,
         'market' => $prices['market'] ?? null,
-        'directLow' => $prices['directLow'] ?? null,
+        'directLow' => $prices['direct_low'] ?? null,
         'seen_id' => $rawId,
       ]);
     }
 
     $owned = [
       'name' => $seen->name,
-      'pricePaid' => $request->pricePaid,  // Allow mass-assignment for pricePaid
+      'price_paid' => $request->pricePaid,  // Allow mass-assignment for pricePaid
       'seen_id' => $seen->id,    // Allow mass-assignment for seen_id
       'user_id' => Auth::id(),
     ];

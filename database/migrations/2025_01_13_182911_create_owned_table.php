@@ -15,7 +15,7 @@ return new class extends Migration
       $table->id();
       $table->string('name');
       $table->timestamps();
-      $table->decimal('pricePaid', 8, 2); // Decimal for price
+      $table->decimal('price_paid', 8, 2); // Decimal for price
       $table->string('seen_id'); // Change to string to match 'seen.id'
       $table->foreign('seen_id')->references('id')->on('seen'); // Foreign key constraint
       $table->foreignId('user_id')->constrained('users')->cascadeOnDelete(); // Connect to 'users' table

@@ -17,3 +17,13 @@ export function useSet(id: string) {
     staleTime: 24 * 60 * 60 * 1000,
   });
 }
+
+export function useCard(setId: string, cardId: string) {
+  const { data, isLoading, isFetching, error } = useSet(setId);
+
+  const card = data?.find((card) => card.id === cardId);
+
+  const loading = isLoading || isFetching;
+
+  return { card, isLoading, loading, error };
+}

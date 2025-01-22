@@ -11,22 +11,23 @@ return new class extends Migration
    */
   public function up(): void
   {
+
     Schema::create('seen', function (Blueprint $table) {
       $table->string('id')->primary();
-
       $table->string('name');
       $table->string('number');
       $table->string('type');
-      $table->string('cardId');
-      $table->string('image');
-      $table->string('setId');
-      $table->string('setName');
-      $table->string('setImage');
-      $table->string('setSeries');
+      $table->string('image_url');
+      $table->string('card_id');
+      $table->string('set_id');
       $table->string('rarity');
-      $table->json('rawJson');
-
       $table->timestamps();
+
+      // Foreign key constraint
+      $table->foreign('set_id')->references('id')->on('sets')->onDelete('cascade');
+
+      /* $table->index('set_id');  // Index for foreign key column */
+      /* $table->index('card_id'); // Index for card_id for searching */
     });
   }
 
