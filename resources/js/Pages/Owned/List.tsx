@@ -1,8 +1,4 @@
 import { IOwned } from '@/all-types';
-import { Head } from '@inertiajs/react';
-import { format } from 'date-fns';
-import { useState } from 'react';
-
 import { CardInfo } from '@/Components/CardInfo';
 import {
   Table,
@@ -12,6 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/Components/ui/table';
+import { Head } from '@inertiajs/react';
+import { format } from 'date-fns';
+import { useState } from 'react';
 
 interface IOwnedListProps {
   cards: IOwned[];

@@ -7,7 +7,6 @@ import {
   LineChart,
   ResponsiveContainer,
   XAxis,
-  YAxis,
 } from 'recharts';
 
 interface IPriceChartDataProps {
@@ -23,7 +22,7 @@ export default function PricesChart({ priceChartData }: IPriceChartDataProps) {
           dataKey="created_at"
           tickFormatter={(date) => format(new Date(date), 'MM/dd/yy')} // Format for the date
         />
-        <YAxis label={{ value: 'Value', angle: -90, position: 'insideLeft' }} />
+        {/*<YAxis label={{ value: 'Value', angle: -90, position: 'insideLeft' }} /> */}
         <Legend />
         <Line type="monotone" dataKey="low" stroke="#8884d8" name="Low" />
         <Line type="monotone" dataKey="mid" stroke="#82ca9d" name="Mid" />

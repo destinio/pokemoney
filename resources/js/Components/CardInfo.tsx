@@ -14,6 +14,7 @@ import { isPositive } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import classNames from 'classnames';
 import { format } from 'date-fns';
+import { FaX } from 'react-icons/fa6';
 import PricesChart from './PricesChart';
 
 interface ICardInfoProps {
@@ -29,16 +30,20 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
   const marketPrice = Number(card.prices[0].market || 0);
   const pricePaid = Number(card.pricePaid || 0);
 
+  const value = pricePaid - marketPrice;
+
   return (
     <div className="flex flex-col gap-4 bg-slate-900">
-      <div className="flex-0 mb-2 flex flex-col pb-2">
-        <div className="flex w-full justify-between">
+      <div className="flex-0 mb-2 flex flex-col gap-2 pb-2">
+        <div className="flex w-full justify-between border-b-2 border-b-slate-600">
           <div className="mb-4 flex items-baseline gap-2">
             <span>{cardNumber}</span>
             <h2 className="text-2xl">{card.name}</h2>
             <h3>{cardType}</h3>
           </div>
-          <button onClick={close}>X</button>
+          <button className="text-2xl" onClick={close}>
+            <FaX />
+          </button>
         </div>
         <div className="mb-4 flex justify-between">
           <span>Created at: </span>
@@ -46,17 +51,20 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
         </div>
         <div
           className={`mb-4 text-2xl font-bold ${classNames({
-            'text-green-400': isPositive(marketPrice - pricePaid),
-            'text-red-500': !isPositive(marketPrice - pricePaid),
+            'text-green-400': isPositive(value),
+            'text-red-500': !isPositive(value),
           })}`}
         >
-          <span>{isPositive(marketPrice) ? '+' : ''}</span>
-          <span>{marketPrice}</span>
+          <span>{isPositive(value) ? '+' : ''} </span>
+          <span>{value.toFixed(2)}</span>
         </div>
-        <div>{card.pricePaid}</div>
-        <div className="grid grid-cols-3">
-          <img src={card.image} alt={card.name} />
-          <div className="col-span-2">
+        <div className="flex flex-col gap-6 md:grid md:grid-cols-3">
+          <img
+            className="order-2 md:order-1"
+            src={card.image}
+            alt={card.name}
+          />
+          <div className="order-1 md:order-2 md:col-span-2">
             <PricesChart priceChartData={card.prices} />
           </div>
         </div>
