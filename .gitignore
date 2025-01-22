@@ -24,3 +24,4 @@ yarn-error.log
 price_log.csv
 
 frankenphp.log
+.DS_Store

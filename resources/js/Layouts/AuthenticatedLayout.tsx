@@ -19,8 +19,11 @@ export default function Authenticated({
           >
             Dashboard
           </NavLink>
-          <NavLink href={route('sets')} active={route().current('sets')}>
-            Sets
+          <NavLink
+            href={route('series.index')}
+            active={route().current('series')}
+          >
+            series
           </NavLink>
           <NavLink
             href={route('owned.index')}

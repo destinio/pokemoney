@@ -1,4 +1,4 @@
-export interface ISet {
+export interface ISetOG {
   id: string;
   name: string;
   series: string;
@@ -114,7 +114,7 @@ export interface IOwned {
   cardId: string;
   created_at: string; // ISO 8601 string format for timestamps
   id: number; // auto-incrementing primary key
-  image: string;
+  image_url: string;
   name: string;
   number: string;
   pricePaid: number;
@@ -137,3 +137,26 @@ export type CardPriceType =
   | 'reverseHolofoil'
   | '1stEditionHolofoil'
   | '1stEditionNormal';
+
+export interface ISet {
+  id: string;
+  name: string;
+  series_id: number;
+  printed_total: number;
+  total: number;
+  release_date: string;
+  symbol_url: string;
+  logo_url: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ISeries {
+  id: number;
+  name: string;
+  release_date: string;
+  image_url: string;
+  created_at: string;
+  updated_at: string;
+  sets: ISet[];
+}

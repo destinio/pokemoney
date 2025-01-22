@@ -105,13 +105,8 @@ export function SaveCardForm({ card }: { card: ICard }) {
               type: type,
               cardId: card.id,
               setId: card.set.id,
-              setName: card.set.name,
-              setImage: card.set.images.logo,
-              setSeries: card.set.series,
               rarity: card.rarity,
-              image: card.images.small,
-              rawJson: JSON.stringify(card),
-              prices: JSON.stringify(card.tcgplayer.prices[type]),
+              imageUrl: card.images.small,
               pricePaid: pricePaid,
             }}
           >

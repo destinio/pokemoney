@@ -16,7 +16,7 @@ class CardPriceData extends Model
     'mid',
     'high',
     'market',
-    'directLow',
+    'direct_low',
     'seen_id',
   ];
 

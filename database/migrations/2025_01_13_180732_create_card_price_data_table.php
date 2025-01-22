@@ -18,7 +18,7 @@ return new class extends Migration
         $table->decimal('mid', 8, 2)->nullable();
         $table->decimal('high', 8, 2)->nullable();
         $table->decimal('market', 8, 2)->nullable();
-        $table->decimal('directLow', 8, 2)->nullable();
+        $table->decimal('direct_low', 8, 2)->nullable();
         $table->string('seen_id');
         $table->foreign('seen_id')->references('id')->on('seen');
 

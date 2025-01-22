@@ -61,7 +61,7 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3">
           <img
             className="order-2 md:order-1"
-            src={card.image}
+            src={card.image_url}
             alt={card.name}
           />
           <div className="order-1 md:order-2 md:col-span-2">

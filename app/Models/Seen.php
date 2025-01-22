@@ -19,15 +19,11 @@ class Seen extends Model
     'id',
     'name',
     'number',
-    'cardId',
+    'card_id',
     'type',
-    'image',
-    'setId',
-    'setName',
-    'setImage',
-    'setSeries',
+    'image_url',
+    'set_id',
     'rarity',
-    'rawJson',
     'user_id',
   ];
 
