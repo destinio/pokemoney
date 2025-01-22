@@ -18,10 +18,16 @@ export default function SetsShowPage({ set }: PageProps<{ set: ISet }>) {
       <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {loading ? <h2>Loading cards...</h2> : null}
         {data?.map((card) => {
+          const hasPrice = !!card.tcgplayer?.prices;
+
           return (
             <div key={card.id} className="">
               <img src={card.images.small} alt={card.name} />
-              {!loading ? <SaveModal card={card} /> : null}
+              {!loading && hasPrice ? (
+                <SaveModal card={card} />
+              ) : (
+                <span>No price data</span>
+              )}
             </div>
           );
         })}
