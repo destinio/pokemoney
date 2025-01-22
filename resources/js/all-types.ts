@@ -118,7 +118,7 @@ export interface IOwned {
   name: string;
   number: string;
   pricePaid: number;
-  prices: IPrice[]; // TODO: Change out for new IPrice
+  prices: IPrice[];
   rarity: string;
   rawJson: object; // JSON object, could be any complex structure
   seenName: string;
