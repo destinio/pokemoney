@@ -61,13 +61,13 @@ class OwnedController extends Controller
     $seen = Seen::firstOrCreate(
       ['id' => $rawId], // Find by this unique identifier
       [                 // Create with these values if not found
-        'name' => $request->name,
-        'number' => $request->number,
         'card_id' => $request->cardId,
         'image_url' => $request->imageUrl,
-        'type' => $request->type,
-        'set_id' => $request->setId,
+        'name' => $request->name,
+        'number' => $request->number,
         'rarity' => $request->rarity,
+        'set_id' => $request->setId,
+        'type' => $request->type,
       ]
     );
 
@@ -80,7 +80,7 @@ class OwnedController extends Controller
         'mid' => $prices['mid'] ?? null,
         'high' => $prices['high'] ?? null,
         'market' => $prices['market'] ?? null,
-        'directLow' => $prices['direct_low'] ?? null,
+        'direct_low' => $prices['direct_low'] ?? null,
         'seen_id' => $rawId,
       ]);
     }

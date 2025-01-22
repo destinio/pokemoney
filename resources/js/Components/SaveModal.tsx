@@ -100,14 +100,15 @@ export function SaveCardForm({ card }: { card: ICard }) {
             onClick={handleSave}
             disabled={saving}
             data={{
+              cardId: card.id,
+              imageUrl: card.images.small,
               name: card.name,
               number: card.number,
-              type: type,
-              cardId: card.id,
-              setId: card.set.id,
-              rarity: card.rarity,
-              imageUrl: card.images.small,
               pricePaid: pricePaid,
+              rarity: card.rarity,
+              setId: card.set.id,
+              prices: JSON.stringify(card.tcgplayer.prices[type]),
+              type: type,
             }}
           >
             {saving ? 'Saving...' : 'Save'}

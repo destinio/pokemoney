@@ -87,7 +87,7 @@ interface Images2 {
 export interface Tcgplayer {
   url: string;
   updatedAt: string;
-  prices: Record<CardPriceType, Prices>;
+  prices: Record<CardPriceType, IPrices>;
 }
 
 export interface IPrice {
@@ -96,18 +96,18 @@ export interface IPrice {
   mid: number | string;
   high: number | string;
   market: number | string;
-  directLow: number | string;
+  direct_low: number | string;
   seen_id: string;
   created_at: string;
   updated_at: string;
 }
 
-export interface Prices {
+export interface IPrices {
   low: number;
   mid: number;
   high: number;
   market: number;
-  directLow: number;
+  direct_low: number;
 }
 
 export interface IOwned {
