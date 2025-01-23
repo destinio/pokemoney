@@ -43,11 +43,11 @@ cards_data = [(row[0], row[1], row[2]) for row in cursor.fetchall()]
 def create_new_price_data(prices):
     card_data = (
         prices["seen_id"],  # apiCardId
-        prices.get("low", None),  # low
-        prices.get("mid", None),  # mid
-        prices.get("high", None),  # high
-        prices.get("market", None),  # market
-        prices.get("directLow", None),  # directLow
+        prices.get("low", None),
+        prices.get("mid", None),
+        prices.get("high", None),
+        prices.get("market", None),
+        prices.get("direct_low", None),
         prices["created_at"],
         prices["updated_at"],
     )
@@ -56,7 +56,7 @@ def create_new_price_data(prices):
 def insert_price_data(card_data):
     cursor.execute(
         """
-    INSERT INTO card_price_data (seen_id, low, mid, high, market, directLow, created_at, updated_at)
+    INSERT INTO card_price_data (seen_id, low, mid, high, market, direct_low, created_at, updated_at)
     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
     """,
         card_data,
@@ -94,10 +94,6 @@ def get_card_prices(cards_data):
 
             live_updated_date = c_d["tcgplayer"]["updatedAt"]
 
-            if card_created_at == live_updated_date:
-                print("No update needed")
-                return
-
             price = c_d["tcgplayer"]["prices"].get(type)
 
             current_datetime = datetime.now()
@@ -109,7 +105,7 @@ def get_card_prices(cards_data):
                 "mid": price.get("mid"),
                 "high": price.get("high"),
                 "market": price.get("market"),
-                "directLow": price.get("directLow"),
+                "direct_low": price.get("direct_low"),
                 "created_at": formatted_datetime,
                 "updated_at": formatted_datetime,
             }
