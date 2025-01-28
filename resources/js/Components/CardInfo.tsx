@@ -28,7 +28,7 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
   const [_seriesSet, cardNumber] = cardId.split('-');
 
   const marketPrice = Number(card.prices[0].market || 0);
-  const pricePaid = Number(card.pricePaid || 0);
+  const pricePaid = Number(card.price_paid || 0);
 
   const value = pricePaid - marketPrice;
 
@@ -55,7 +55,7 @@ export const CardInfo = ({ card, close, handleDelete }: ICardInfoProps) => {
             'text-red-500': !isPositive(value),
           })}`}
         >
-          <span>{isPositive(value) ? '+' : ''} </span>
+          <span>{isPositive(value) ? '+' : '-'} </span>
           <span>{value.toFixed(2)}</span>
         </div>
         <div className="flex flex-col gap-6 md:grid md:grid-cols-3">
