@@ -117,7 +117,7 @@ export interface IOwned {
   image_url: string;
   name: string;
   number: string;
-  pricePaid: number;
+  price_paid: number;
   prices: IPrice[];
   rarity: string;
   rawJson: object; // JSON object, could be any complex structure
