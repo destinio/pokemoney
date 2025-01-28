@@ -17,7 +17,7 @@ const wait = () => new Promise((resolve) => setTimeout(resolve, 1000));
 export function SaveCardForm({ card }: { card: ICard }) {
   console.log(card);
   const [type, setType] = useState<CardPriceType>(
-    () => Object.entries(card.tcgplayer.prices)[0][0] as CardPriceType,
+    () => Object.entries(card.tcgplayer?.prices)[0][0] as CardPriceType,
   );
 
   const [pricePaid, setPricePaid] = useState(0);

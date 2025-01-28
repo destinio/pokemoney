@@ -21,7 +21,15 @@ This project utilizes the following APIs:
 ## Getting Started
 To get started with the project, clone the repository and follow the setup instructions provided in the documentation.
 
-## Pull Requests
+## 🤝 Contributing
+Feel free to contribute to the project by following the steps below:
+- Fork the repository
+- Create a new branch (`git checkout -b feature`)
+- Make changes and commit them (`git commit -am 'Add new feature'`)
+- Push the changes to the branch (`git push origin feature`)
+- Create a new Pull Request
+
+### Pull Requests
 - All pull requests are reviewed by Github AI Reviewer.
 - https://docs.github.com/en/copilot/using-github-copilot/code-review/using-copilot-code-review
 
