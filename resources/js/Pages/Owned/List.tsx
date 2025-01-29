@@ -53,7 +53,10 @@ export function OwnedList({ cards: cardsRaw }: IOwnedListProps) {
 
       <div className="">
         <header className="mb-8 flex justify-between">
-          <div>Owned Cards</div>
+          <div>
+            {/* <div>Total Spent: {totalSpent}</div> */}
+            {/* <div>Total Value: {totalSpent}</div> */}
+          </div>
         </header>
         {currentCard ? (
           <CardInfo
